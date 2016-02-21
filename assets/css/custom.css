@@ -7,7 +7,7 @@ body {
 }
 
 #wikiDisplay {
-    max-height: 325px;
+    max-height: 375px;
     margin: 20px auto 25px auto;
     overflow: scroll;
     transition: all 5s ease-in-out;
@@ -64,4 +64,17 @@ i {
 
 .learnMore:focus {
     outline: none;
+ }
+
+#toggleDiv {
+    display: none;
+    margin-bottom: 15px;
+ }
+
+ .btn.btn-primary {
+    border-radius: 4px !important;
+ }
+
+ a {
+    color: black;
  }

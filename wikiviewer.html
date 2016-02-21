@@ -5,31 +5,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cosmo/bootstrap.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="./assets/css/custom.css"></link>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
 
 <body ng-controller="wikiCtrl">
-    <!-- Validation -->
     <div class="container flexparent">
+        <!-- search and toggle bar -->
         <form class="form-inline">
             <div class="form-group" id='queryInput'>
                 <div class='input-group'>
                     <input type="text" class="form-control tooltipped" placeholder="Search" ng-model="query" title='or leave blank for a random article' autofocus>
-                    <div class='input-group-addon' ng-click="wikiSearch()"> 
+                    <div class='input-group-addon' ng-click="wikiSearch()">
                         <i class="glyphicon glyphicon-search form-control-feedback"> </i>
                     </div>
                 </div>
             </div>
         </form>
+        <div id='toggleDiv'>
+            <input id="contentToggle" checked type="checkbox" ng-true-value='content'>
+        </div>
+        <!-- end search and toggle bar -->
+        <!-- opening image -->
         <img class='img-responsive' onclick='showInput()' id='wikiLogo' src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png"></img>
+        <!-- error view -->
         <div ng-show='badQuery'>
             <h2>Oops!</h2>
             <h3>It looks like Wikipedia doesn't have an article on that yet.<br/><small>But you could always <a href="https://en.wikipedia.org/wiki/Wikipedia:Your_first_article"> write it!</a></small></h3>
         </div>
-        <div id="wikiDisplay" class="col-xs-8" ng-bind-html='wikiResponse'></div>
-        <div class='text-center' ng-show='dataReceived'>
-            <p><strong>Read more about '{{moreReading}}' on Wikipedia.</strong></p>
-            <a class='btn btn-success btn-lg learnMore' ng-href="https://en.wikipedia.org/wiki/{{moreReading}}" target="_blank">GO</a>
+        <!-- end error view -->
+        <div ng-show='random && !content'>
+            <h2>Hi!</h2>
+            <h3>Check out the content view for your random article.<br/><small>(just use that little toggle button up there.)</small></h3>
         </div>
+        <!-- no wikicontent but not badquery -->
+        <div ng-show='!badQuery && !dataReceived && content'>
+            <h2>Oops!</h2>
+            <h3>It looks like Wikipedia doesn't have an article on that yet.<br/><small>But you could always <a href="https://en.wikipedia.org/wiki/Wikipedia:Your_first_article"> write it! Or check out possible results in the list view.</a></small></h3>
+        </div>
+
+        <!-- list view -->
+        <div id="wikiDisplay" class='col-xs-8' ng-show="!content">
+            <ul class="media-list">
+                <li class="media" ng-repeat='entry in list'>
+                    <div class="media">
+                        <a class="media-left" ng-href="https://en.wikipedia.org/wiki/{{entry.title}}">
+                            <img class="media-object" ng-src="{{entry.thumbnail.source}}" alt="{{entry.pageimage}}">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a ng-href="http://en.wikipedia.org/?curid={{entry.pageid}}">{{entry.title}}</a></h4> {{entry.extract}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- end list view -->
+        <!-- content view -->
+        <div id="wikiDisplay" class="col-xs-8" ng-show='content' ng-bind-html='wikiResponse'></div>
+        <div class='text-center' ng-show='dataReceived && content'>
+            <p><strong>Read more about '{{moreReading}}' on Wikipedia.</strong></p>
+            <a class='btn btn-primary btn-lg' ng-href="https://en.wikipedia.org/wiki/{{moreReading}}" target="_blank">GO</a>
+        </div>
+        <!-- end content view -->
+
         <br/>
     </div>
     <script type="text/javascript" src="bower_components/angular/angular.js">
@@ -37,7 +74,10 @@
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script>
+    </script>
 </body>
 
 </html>
