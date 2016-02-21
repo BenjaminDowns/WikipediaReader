@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="wikiApp">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cosmo/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./assets/css/custom.css"></link>
+</head>
+
+<body ng-controller="wikiCtrl">
+    <!-- Validation -->
+    <div class="container flexparent">
+        <form class="form-inline">
+            <div class="form-group" id='queryInput'>
+                <div class='input-group'>
+                    <input type="text" class="form-control tooltipped" placeholder="Search" ng-model="query" title='or leave blank for a random article' autofocus>
+                    <div class='input-group-addon' ng-click="wikiSearch()"> 
+                        <i class="glyphicon glyphicon-search form-control-feedback"> </i>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <img class='img-responsive' onclick='showInput()' id='wikiLogo' src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png"></img>
+        <div ng-show='badQuery'>
+            <h2>Oops!</h2>
+            <h3>It looks like Wikipedia doesn't have an article on that yet.<br/><small>But you could always <a href="https://en.wikipedia.org/wiki/Wikipedia:Your_first_article"> write it!</a></small></h3>
+        </div>
+        <div id="wikiDisplay" class="col-xs-8" ng-bind-html='wikiResponse'></div>
+        <div class='text-center' ng-show='dataReceived'>
+            <p><strong>Read more about '{{moreReading}}' on Wikipedia.</strong></p>
+            <button class='btn btn-success btn-lg' ng-href="https://en.wikipedia.org/wiki/{{moreReading}}">GO</button>
+        </div>
+        <br/>
+    </div>
+    <script type="text/javascript" src="bower_components/angular/angular.js">
+    </script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>

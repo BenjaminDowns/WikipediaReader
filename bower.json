@@ -1,0 +1,31 @@
+{
+  "name": "wikiViewer",
+  "version": "0.1",
+  "authors": [
+    "Benjamin Downs <benjamin.downs@gmail.com>"
+  ],
+  "description": "Wikipedia viewer using AngularJS(1)",
+  "main": "wikiviewer.html",
+  "keywords": [
+    "wikipedia",
+    "angularjs",
+    "freecodecamp"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "jquery": "~2.2.0",
+    "animate.css": "~3.5.1",
+    "angular-sanitize": "^1.5.0"
+  },
+  "resolutions": {
+    "angular": "1.5.0"
+  }
+}

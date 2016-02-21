@@ -1,0 +1,63 @@
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #eeeeee;
+}
+
+#wikiDisplay {
+    max-height: 325px;
+    margin: 20px auto 25px auto;
+    overflow: scroll;
+    transition: all 5s ease-in-out;
+}
+
+.flexparent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#queryInput {
+    max-width: 225px;
+    height: 40px;
+    margin: 100px auto 20px auto;
+    display: none;
+}
+
+input {
+    border-radius: 4px !important;
+}
+
+#wikiLogo {
+    margin: 100px auto;
+    width: 300px;
+    height: 300px;
+}
+
+#searchButton {
+    display: none;
+}
+
+#searchButton:focus {
+    outline: none;
+}
+
+.input-group-addon {
+    border-radius: 4px !important;
+}
+
+i {
+    font-size: 1em;
+    z-index: 1000;
+}
+
+.input-group-addon {
+    cursor: pointer;
+}
+
+button {
+    border-radius: 8px !important;
+}
