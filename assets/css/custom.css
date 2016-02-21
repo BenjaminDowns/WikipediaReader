@@ -58,6 +58,10 @@ i {
     cursor: pointer;
 }
 
-button {
+.learnMore {
     border-radius: 8px !important;
 }
+
+.learnMore:focus {
+    outline: none;
+ }

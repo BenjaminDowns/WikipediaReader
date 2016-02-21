@@ -28,7 +28,7 @@
         <div id="wikiDisplay" class="col-xs-8" ng-bind-html='wikiResponse'></div>
         <div class='text-center' ng-show='dataReceived'>
             <p><strong>Read more about '{{moreReading}}' on Wikipedia.</strong></p>
-            <button class='btn btn-success btn-lg' ng-href="https://en.wikipedia.org/wiki/{{moreReading}}">GO</button>
+            <a class='btn btn-success btn-lg learnMore' ng-href="https://en.wikipedia.org/wiki/{{moreReading}}" target="_blank">GO</a>
         </div>
         <br/>
     </div>
