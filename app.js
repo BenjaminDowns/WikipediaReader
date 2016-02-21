@@ -65,6 +65,9 @@ angular.module('wikiApp', ['ngSanitize'])
                     $scope.badQuery = true;
                     $scope.wikiResponse = error.data
                     $scope.query = ''
+                    $scope.moreReading = ''
+                    $scope.dataReceived = false
+
                 })
     }
 
