@@ -1,29 +1,27 @@
 angular.module('wikiApp', ['ngSanitize'])
 
-.factory("wikiService", ["$http", function($http) {
+// CONTROLLER TO MAKE AJAX CALLS 
+.factory("wikiService", ["$http", ($http) => {
 
-    var wikiService = {
+    let wikiService = {
 
-        get: function(query) {
-            // var random = new RegExp('generator=random')
-            if (/generator\=random/.test(query)) {
-                return $http.jsonp(query)
-            } else {
-                return $http.jsonp('http://en.wikipedia.org/w/api.php?titles=' + query + '&rawcontinue=true&action=query&format=json&prop=extracts&callback=JSON_CALLBACK')
-            }
+        get: (query) => {
+          let newQuery = `http://en.wikipedia.org/w/api.php?titles=${query}&rawcontinue=true&action=query&format=json&prop=extracts&callback=JSON_CALLBACK`
+          
+          return (/generator\=random/.test(query)) ? $http.jsonp(query) : $http.jsonp(newQuery)
         },
 
-        getList: function(query) {
-            var url = 'http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + query + '&callback=JSON_CALLBACK'
-            return $http.jsonp(url)
-                
+        getList: (query) => {
+            let newQuery = `http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=${query}&callback=JSON_CALLBACK`
+            
+            return $http.jsonp(newQuery)    
         }
     }
     return wikiService
 }])
 
 
-.controller("wikiCtrl", ["$scope", "wikiService", function($scope, wikiService) {
+.controller("wikiCtrl", ["$scope", "wikiService", ($scope, wikiService) => {
     $scope.query;
     $scope.wikiResponse;
     $scope.dataReceived = false
@@ -32,18 +30,14 @@ angular.module('wikiApp', ['ngSanitize'])
     $scope.list
     $scope.random
 
-    $('#queryInput').bind('keypress', function(e) {
-        if (e.keyCode == 13) {
-            return $scope.wikiSearch()
-        }
-    });
+    $('#queryInput').bind('keypress', (e) => e.keyCode == 13 ? $scope.wikiSearch() : null );
 
-    $('#contentToggle').change(function() {
+    $('#contentToggle').change(() => {
         $scope.content = !$scope.content
         $scope.$apply()
     });
 
-    $scope.wikiSearch = function() {
+    $scope.wikiSearch = () => {
 
         if (!$scope.query) {
             $scope.query = 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=random&grnnamespace=0&prop=extracts&callback=JSON_CALLBACK'
@@ -55,15 +49,17 @@ angular.module('wikiApp', ['ngSanitize'])
         }
 
         wikiService.get($scope.query)
-            .then(function(data) {
-                    //\\ reset all variables; clean form //\\
+            .then((data) => {
+                    
+                    // RESET ALL VARIABLES; CLEAR FORM //
                     $scope.query = ''
                     $scope.wikiResponse = ''
                     $scope.dataReceived = false
                     $scope.badQuery = false
                     $scope.moreReading = ''
-                    var responseObject = data.data.query.pages
-                    $.each(responseObject, function(index, value) {
+                    let responseObject = data.data.query.pages
+                    // BIND RETURNED DATA TO SCOPE //
+                    $.each(responseObject, (index, value) => {
 
                         if (data.data.query.pages[-1]) {
                             $scope.list = ''
@@ -78,8 +74,9 @@ angular.module('wikiApp', ['ngSanitize'])
 
                     })
                 },
-                // error handling //
-                function(error) {
+                  
+                // ERROR HANDLING //
+                (error) => {
                     $scope.badQuery = true;
                     $scope.wikiResponse = error.data
                     $scope.query = ''
@@ -89,8 +86,8 @@ angular.module('wikiApp', ['ngSanitize'])
                 })
 
         wikiService.getList($scope.query)
-            .success(function(data) {
-                    var results = data.query.pages;
+            .success((data) => {
+                    let results = data.query.pages;
                     $scope.list = results
                     $scope.badQuery = false;
                 })
@@ -105,19 +102,14 @@ $('.tooltipped').tooltip({
     trigger: "hover"
 });
 
-
-
-
 function showInput() {
     $('#wikiLogo').fadeOut('slow')
     $('#queryInput').show('slow')
     $('#toggleDiv').fadeIn().css('display', 'inline-block')
     $('#contentToggle').bootstrapToggle({
         on: 'List View',
-        off: 'Content View'
+        off: 'Reader View'
     })
 }
 
-setTimeout(function() {
-    showInput()
-}, 2000)
+setTimeout(() => showInput(), 2000)
