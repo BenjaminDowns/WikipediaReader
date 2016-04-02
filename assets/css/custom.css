@@ -1,80 +1,83 @@
 * {
-    font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 body {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 
 #wikiDisplay {
-    max-height: 375px;
-    margin: 20px auto 25px auto;
-    overflow: scroll;
-    transition: all 5s ease-in-out;
+  max-height: 375px;
+  margin: 20px auto 25px auto;
+  overflow: scroll;
+  transition: all 5s ease-in-out;
 }
 
 .flexparent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #queryInput {
-    max-width: 225px;
-    height: 40px;
-    margin: 100px auto 20px auto;
-    display: none;
+  max-width: 225px;
+  height: 40px;
+  margin: 100px auto 20px auto;
+  display: none;
 }
 
 input {
-    border-radius: 4px !important;
+  border-radius: 4px !important;
 }
 
 #wikiLogo {
-    margin: 100px auto;
-    width: 300px;
-    height: 300px;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  margin: -70px 0 0 -170px;
+  width: 300px;
+  height: 300px;
 }
 
 #searchButton {
-    display: none;
+  display: none;
 }
 
 #searchButton:focus {
-    outline: none;
+  outline: none;
 }
 
 .input-group-addon {
-    border-radius: 4px !important;
+  border-radius: 4px !important;
 }
 
 i {
-    font-size: 1em;
-    z-index: 1000;
+  font-size: 1em;
+  z-index: 1000;
 }
 
 .input-group-addon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .learnMore {
-    border-radius: 8px !important;
+  border-radius: 8px !important;
 }
 
 .learnMore:focus {
-    outline: none;
- }
+  outline: none;
+}
 
 #toggleDiv {
-    display: none;
-    margin-bottom: 15px;
- }
+  display: none;
+  margin-bottom: 15px;
+}
 
- .btn.btn-primary {
-    border-radius: 4px !important;
- }
+.btn.btn-primary {
+  border-radius: 4px !important;
+}
 
- a {
-    color: black;
- }
+a {
+  color: black;
+}
